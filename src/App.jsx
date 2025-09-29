@@ -187,8 +187,13 @@ function App() {
   return (
     <div className="app-container">
       <div className="sidebar">
+        <div className="sidebar-header">
           <h1>🛰️ ArgoSphere</h1>
           <p>AI-powered prototype for exploring ARGO float data.</p>
+        </div>
+
+        <div className="sidebar-section">
+          <h2>Controls</h2>
           <label htmlFor="param-select">Select Parameter:</label>
           <select id="param-select" value={selectedParameter} onChange={(e) => handleParameterChange(e.target.value)}>
               <option value="temperature">Temperature</option>
@@ -198,13 +203,23 @@ function App() {
               <option value="oxygen">Dissolved Oxygen</option>
               <option value="nitrate">Nitrate</option>
           </select>
-          <h2>Selected Float: {selectedFloatId || 'None'}</h2>
+        </div>
+
+        <div className="sidebar-section">
+          <h2>Current Selection</h2>
+          <div className="selection-info">
+            <span>Float ID:</span>
+            <strong>{selectedFloatId || 'None'}</strong>
+          </div>
           <p className="parameter-explanation">
             {parameterExplanations[selectedParameter]}
           </p>
-          {tableData.length > 0 && isChartVisible && (
+        </div>
+        
+        {tableData.length > 0 && isChartVisible && (
+          <div className="sidebar-section">
+            <h3>Query Results:</h3>
             <div className="sidebar-table-container">
-              <h3>Query Results:</h3>
               <table className="sidebar-table">
                 {tableMode === 'bgc' ? (
                   <>
@@ -219,7 +234,8 @@ function App() {
                 )}
               </table>
             </div>
-          )}
+          </div>
+        )}
       </div>
       <div className={`main-content ${isChartVisible ? 'chart-visible' : ''}`}>
         <div className="cesium-container">

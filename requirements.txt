@@ -1,0 +1,9 @@
+xarray
+netcdf4
+pandas
+numpy
+SQLAlchemy
+psycopg2-binary
+geoalchemy2
+python-dateutil
+tqdm

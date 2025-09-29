@@ -1,8 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 
-function Chatbot({ messages, inputValue, onInputChange, onSendMessage }) {
+function Chatbot({ messages, inputValue, onInputChange, onSendMessage, suggestions, onSuggestionClick }) {
   const chatEndRef = useRef(null);
-
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
@@ -20,6 +19,11 @@ function Chatbot({ messages, inputValue, onInputChange, onSendMessage }) {
             {msg.text}
           </div>
         ))}
+        {suggestions && suggestions.length > 0 && (
+            <div className="suggestion-buttons">
+                {suggestions.map((s, i) => <button key={i} className="suggestion-btn" onClick={() => onSuggestionClick(s)}>{s}</button>)}
+            </div>
+        )}
         <div ref={chatEndRef} />
       </div>
       <form className="chat-input" onSubmit={handleSubmit}>
